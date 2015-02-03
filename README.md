@@ -46,19 +46,19 @@ console.log(new StyledConsole("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><
 - scyan
 - sgray
 
-### `<c:{colorCode}>` or `<color:{colorCode}>`
+### `c:{colorCode}` or `color:{colorCode}`
 
 Change font color.
 
-### `<b:{colorCode}>` or `<background:{colorCode}>`
+### `b:{colorCode}` or `background:{colorCode}`
 
 Change background color.
 
-### `<b>` or `<strong>`
+### `b` or `strong`
 
 Apply bold text.
 
-### `<u>` or `<underline>`
+### `u` or `underline`
 
 Apply underlined text.
 
