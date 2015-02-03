@@ -1,10 +1,14 @@
 {
-  "name": "colored-console",
+  "name": "styled-console",
   "version": "0.0.1",
-  "description": "print colored console.",
-  "main": "colored-console.js",
+  "description": "print styled console.",
+  "main": "styled-console.js",
   "engines": { "node": ">= 0.4.0" },
-  "author": "Changwan Jun<me@wani.kr>",
+  "author": {"name": "Changwan Jun", "email": "me@wani.kr"},
   "license": "MIT",
-  "keywords": ["console", "color"]
+  "keywords": ["console", "color", "style"],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wan2land/styled-console.git"
+  }
 }

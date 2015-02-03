@@ -1,4 +1,4 @@
-Colored Console
+Styled Console
 ===
 
 ![Example](example.png)
@@ -8,21 +8,21 @@ Colored Console
 ### npm
 
 ```bash
-$ npm install colored-console
+$ npm install styled-console
 ```
 
 ## How To Use
 
 ```js
-var ColoredConsole = require('colored-console');
-console.log(ColoredConsole("plain <c:red>Hel<b:blue>l</b:blue>o World</c:red>").parse());
+var StyledConsole = require('styled-console');
+console.log(StyledConsole("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><b:blue>le</b:blue>.").parse());
 ```
 
 or
 
 ```js
-var ColoredConsole = require('colored-console');
-console.log(new ColoredConsole("plain <c:red>Hel<b:blue>l</b:blue>o World</c:red>").parse());
+var StyledConsole = require('styled-console');
+console.log(new StyledConsole("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><b:blue>le</b:blue>.").parse());
 ```
 
 ## Tags

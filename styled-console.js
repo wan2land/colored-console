@@ -6,7 +6,7 @@
         define(factory);
     }
     else {
-        global.StyleSplitter = factory();
+        global.StyledConsole = factory();
     }
 })(this, function() {
 
@@ -98,9 +98,9 @@
         return backgroundColorCodes[color];
     };
 
-    var ColoredConsole = function(contents) {
-        if (!(this instanceof ColoredConsole)) {
-            return new ColoredConsole(contents);
+    var StyledConsole = function(contents) {
+        if (!(this instanceof StyledConsole)) {
+            return new StyledConsole(contents);
         }
         this.parsedContents = null;
         this.contents = contents;
@@ -114,7 +114,7 @@
         return carr;
     };
 
-    ColoredConsole.prototype = {
+    StyledConsole.prototype = {
         parse: function() {
             if (this.parsedContents === null) {
                 this.parsedContents = '';
@@ -189,5 +189,5 @@
         }
     };
 
-    return ColoredConsole;
+    return StyledConsole;
 });
