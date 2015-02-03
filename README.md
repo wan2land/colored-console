@@ -3,17 +3,25 @@ Colored Console
 
 ![Example](example.png)
 
+## Install
+
+### npm
+
+```bash
+$ npm install colored-console
+```
+
 ## How To Use
 
 ```js
-var ColoredConsole = require('./colored-console');
+var ColoredConsole = require('colored-console');
 console.log(ColoredConsole("plain <c:red>Hel<b:blue>l</b:blue>o World</c:red>").parse());
 ```
 
 or
 
 ```js
-var ColoredConsole = require('./colored-console');
+var ColoredConsole = require('colored-console');
 console.log(new ColoredConsole("plain <c:red>Hel<b:blue>l</b:blue>o World</c:red>").parse());
 ```
 
