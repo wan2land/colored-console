@@ -3,12 +3,24 @@
   "version": "0.0.1",
   "description": "print styled console.",
   "main": "styled-console.js",
-  "engines": { "node": ">= 0.4.0" },
-  "author": {"name": "Changwan Jun", "email": "me@wani.kr"},
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "author": {
+    "name": "Changwan Jun",
+    "email": "me@wani.kr"
+  },
   "license": "MIT",
-  "keywords": ["console", "color", "style"],
+  "keywords": [
+    "console",
+    "color",
+    "style"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/wan2land/styled-console.git"
+  },
+  "dependencies": {
+    "htmlparser2": "^3.8.2"
   }
 }

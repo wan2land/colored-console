@@ -37,8 +37,8 @@ console.log(new StyledConsole("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><
 - purple
 - cyan
 - gray
-- sblack
-- sred
+- sblack (soft black)
+- sred (soft red)
 - sgreen
 - syellow
 - sblue

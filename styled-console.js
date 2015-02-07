@@ -1,14 +1,10 @@
 ;(function(global, factory){
-    if (typeof exports === "object") {
-        module.exports = factory();
-    }
-    else if ( typeof define === 'function' && define.amd ) {
-        define(factory);
-    }
-    else {
-        global.StyledConsole = factory();
-    }
+
+    module.exports = factory();
+
 })(this, function() {
+
+    var htmlparser = require('htmlparser2');
 
     var fontColorCodes = {
         black: 30,
@@ -98,12 +94,10 @@
         return backgroundColorCodes[color];
     };
 
-    var StyledConsole = function(contents) {
+    var StyledConsole = function() {
         if (!(this instanceof StyledConsole)) {
-            return new StyledConsole(contents);
+            return new StyledConsole();
         }
-        this.parsedContents = null;
-        this.contents = contents;
     };
 
     var arrayClone = function(arr) {
@@ -115,77 +109,62 @@
     };
 
     StyledConsole.prototype = {
-        parse: function() {
-            if (this.parsedContents === null) {
-                this.parsedContents = '';
-                
-                var tagStack = [];
+        parse: function(contents) {
 
-                tagStack.push({
-                    name: 'root',
-                    styles: []
-                });
+            var tagStack = [{
+                name: 'root',
+                styles: []
+            }];
 
-                while (this.contents !== '') {
+            var parsedContents = '';
 
+            var parser = new htmlparser.Parser({
+                onopentag: function(name, attrs) {
                     var currentStack = tagStack[tagStack.length - 1];
                     var currentStyles = arrayClone(currentStack.styles);
-                    var matches = null;
 
-                    if (matches = this.contents.match(/^<([^>\/]+)>/)) {
-                        try {
-                            var style = getCodeFromTag(matches[1]);
-                            if (currentStyles.indexOf(style) === -1) {
-                                currentStyles.push(style);
-                            }
-
-                            tagStack.push({
-                                name: matches[1],
-                                styles: currentStyles
-                            });
-
-                            this.parsedContents += "\x1b[" + style + "m";
-                        } catch (e) {}
-
-                        this.contents = this.contents.substr(matches[0].length);
-
-                    } else if (matches = this.contents.match(/^<\/([^>]+)>/)) {
-
-                        if (currentStack.name === matches[1]) {
-                            tagStack.pop();
-
-                            var lastStack = tagStack[tagStack.length - 1];
-                            var lastStyles = lastStack.styles;
-
-                            this.parsedContents += "\x1b[0m";
-                            if (lastStyles.length > 0) {
-                                this.parsedContents += "\x1b[" + lastStyles.join(';') + "m";
-                            }
+                    try {
+                        var style = getCodeFromTag(name);
+                        if (currentStyles.indexOf(style) === -1) {
+                            currentStyles.push(style);
                         }
 
-                        this.contents = this.contents.substr(matches[0].length);
+                        tagStack.push({
+                            name: name,
+                            styles: currentStyles
+                        });
 
-                    // first 
-                    } else if (matches = this.contents.match(/<([^>]+)>/)) {
-                        var searched = matches.index;
+                        parsedContents += "\x1b[" + style + "m";
+                    } catch (e) {}
+                },
+                onclosetag: function(name) {
+                    var currentStack = tagStack[tagStack.length - 1];
+                    var currentStyles = arrayClone(currentStack.styles);
 
-                        this.parsedContents += this.contents.substr(0, searched);
-                        this.contents = this.contents.substr(searched);
+                    if (currentStack.name === name) {
+                        tagStack.pop();
 
+                        var lastStack = tagStack[tagStack.length - 1];
+                        var lastStyles = lastStack.styles;
+
+                        parsedContents += "\x1b[0m";
+                        if (lastStyles.length > 0) {
+                            parsedContents += "\x1b[" + lastStyles.join(';') + "m";
+                        }
                     } else {
-                        this.parsedContents += this.contents;
-                        if (currentStyles.length > 0) {
-                            this.parsedContents += "\x1b[0m";
-                        }
-                        this.contents = '';
+                        console.log("warning..?");
                     }
-
-                    matches = null;
+                },
+                ontext: function(text) {
+                    parsedContents += text;
                 }
-                this.parsedContents = this.parsedContents.replace('&lt;', '<').replace('&gt;', '>');
-            }
+            });
+            parser.write(contents);
+            parser.end();
 
-            return this.parsedContents;
+            parsedContents = parsedContents.replace('&lt;', '<').replace('&gt;', '>');
+
+            return parsedContents;
         }
     };
 
