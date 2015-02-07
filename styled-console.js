@@ -6,6 +6,19 @@
 
     var htmlparser = require('htmlparser2');
 
+    var isString = function(obj) {
+        return ({}).toString.call(obj) === '[object String]';
+    };
+    var clone = function(origin) {
+        var i = 0, len = origin.length, target = [];
+        for (; i < len; i++) {
+            target[i] = origin[i];
+        }
+        return target;
+    };
+
+    var consoleLog = console.log;
+
     var fontColorCodes = {
         black: 30,
         red: 31,
@@ -44,8 +57,6 @@
         sgray: 107
     };
 
-    var pattern = /\<([a-zA-Z0-9_-]+(?:\:[a-zA-Z0-9_-]+)?)\>([^\<]*)\<\/\1\>/;
-
     var getCodeFromTag = function(tag) {
         tag = tag.trim();
         switch (tag) {
@@ -59,7 +70,7 @@
         if (tag.indexOf('color:') === 0 || tag.indexOf('c:') === 0) {
             return getFontColorCodeFromTag(tag);
         }
-        if (tag.indexOf('background:') === 0 || tag.indexOf('b:') === 0) {
+        if (tag.indexOf('background:') === 0 || tag.indexOf('bg:') === 0) {
             return getBackgroundColorCodeFromTag(tag);
         }
         throw new {
@@ -94,21 +105,34 @@
         return backgroundColorCodes[color];
     };
 
-    var StyledConsole = function() {
+    var StyledConsole = function(options) {
         if (!(this instanceof StyledConsole)) {
-            return new StyledConsole();
+            return new StyledConsole(options);
+        }
+        options = options || {};
+        if (options.autoparse && options.autoparse === true) {
+            this.autoParsingOn();
         }
     };
 
-    var arrayClone = function(arr) {
-        var i = 0, ilen = arr.length, carr = [];
-        for (; i < ilen; i++) {
-            carr[i] = arr[i];
-        }
-        return carr;
-    };
 
     StyledConsole.prototype = {
+        autoParseOn: function() {
+            var self = this;
+            console.log = function() {
+                var i = 0, len = arguments.length, argument;
+                for (; i < len; i++) {
+                    argument = arguments[i];
+                    if (isString(argument)) {
+                        arguments[i] = self.parse(argument);
+                    }
+                }
+                consoleLog.apply(console, arguments);
+            };
+        },
+        autoParseOff: function() {
+            console.log = consoleLog;
+        },
         parse: function(contents) {
 
             var tagStack = [{
@@ -121,7 +145,7 @@
             var parser = new htmlparser.Parser({
                 onopentag: function(name, attrs) {
                     var currentStack = tagStack[tagStack.length - 1];
-                    var currentStyles = arrayClone(currentStack.styles);
+                    var currentStyles = clone(currentStack.styles);
 
                     try {
                         var style = getCodeFromTag(name);
@@ -139,7 +163,7 @@
                 },
                 onclosetag: function(name) {
                     var currentStack = tagStack[tagStack.length - 1];
-                    var currentStyles = arrayClone(currentStack.styles);
+                    var currentStyles = clone(currentStack.styles);
 
                     if (currentStack.name === name) {
                         tagStack.pop();

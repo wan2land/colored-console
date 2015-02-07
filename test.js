@@ -1,8 +1,10 @@
 var StyledConsole = require('./styled-console');
-var parser = new StyledConsole;
-console.log(parser.parse("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><b:blue>le</b:blue>."));
-console.log(parser.parse(
-    "plain\n" + 
+var styledConsole = new StyledConsole;
+
+styledConsole.autoParsingOn();
+
+console.log("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><bg:blue>le</bg:blue>.");
+console.log("plain\n" + 
     "<strong>strong</strong>\n" + 
     "<underline>underline</underline>\n" + 
     "<c:black>black</c:black>\n" +
@@ -22,19 +24,19 @@ console.log(parser.parse(
     "<c:scyan>scyan</c:scyan>\n" +
     "<c:sgray>sgray</c:sgray>\n" +
     "<c:black>black</c:black>\n" +
-    "<b:red>red</b:red>\n" +
-    "<b:green>green</b:green>\n" +
-    "<b:yellow>yellow</b:yellow>\n" +
-    "<b:blue>blue</b:blue>\n" +
-    "<b:purple>purple</b:purple>\n" +
-    "<b:cyan>cyan</b:cyan>\n" +
-    "<b:gray>gray</b:gray>\n" +
-    "<b:sblack>sblack</b:sblack>\n" +
-    "<b:sred>sred</b:sred>\n" +
-    "<b:sgreen>sgreen</b:sgreen>\n" +
-    "<b:syellow>syellow</b:syellow>\n" +
-    "<b:sblue>sblue</b:sblue>\n" +
-    "<b:spurple>spurple</b:spurple>\n" +
-    "<b:scyan>scyan</b:scyan>\n" +
-    "<b:sgray>sgray</b:sgray>\n"));
+    "<bg:red>red</bg:red>\n" +
+    "<bg:green>green</bg:green>\n" +
+    "<bg:yellow>yellow</bg:yellow>\n" +
+    "<bg:blue>blue</bg:blue>\n" +
+    "<bg:purple>purple</bg:purple>\n" +
+    "<bg:cyan>cyan</bg:cyan>\n" +
+    "<bg:gray>gray</bg:gray>\n" +
+    "<bg:sblack>sblack</bg:sblack>\n" +
+    "<bg:sred>sred</bg:sred>\n" +
+    "<bg:sgreen>sgreen</bg:sgreen>\n" +
+    "<bg:syellow>syellow</bg:syellow>\n" +
+    "<bg:sblue>sblue</bg:sblue>\n" +
+    "<bg:spurple>spurple</bg:spurple>\n" +
+    "<bg:scyan>scyan</bg:scyan>\n" +
+    "<bg:sgray>sgray</bg:sgray>\n");
 
