@@ -100,7 +100,7 @@ var getBackgroundColorCodeFromTag = function(tag)
 
 var StyledConsole = function(options) {
     if (!(this instanceof StyledConsole)) {
-        return new StyledConsole(contents);
+        return new StyledConsole();
     }
     options = options || {};
 
