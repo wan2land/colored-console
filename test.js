@@ -1,8 +1,8 @@
-var StyledConsole = require('./styled-console');
+var styledConsole = require('./dist/styled-console.min')();
 
-console.log(StyledConsole("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><b:blue>le</b:blue>.").parse());
+console.log(styledConsole.parse("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><b:blue>le</b:blue>."));
 
-console.log(StyledConsole(
+console.log(styledConsole.parse(
     "plain\n" + 
     "<strong>strong</strong>\n" + 
     "<underline>underline</underline>\n" + 
@@ -37,5 +37,5 @@ console.log(StyledConsole(
     "<b:sblue>sblue</b:sblue>\n" +
     "<b:spurple>spurple</b:spurple>\n" +
     "<b:scyan>scyan</b:scyan>\n" +
-    "<b:sgray>sgray</b:sgray>\n").parse());
+    "<b:sgray>sgray</b:sgray>\n"));
 
