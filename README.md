@@ -48,7 +48,7 @@ console.log(
 
 Change font color.
 
-### `<bg:{colorCode}>` or `<background:{colorCode}>`
+### `<b:{colorCode}>` or `<background:{colorCode}>`
 
 Change background color.
 
