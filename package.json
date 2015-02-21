@@ -1,6 +1,6 @@
 {
   "name": "styled-console",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "print styled console.",
   "main": "dist/styled-console.js",
   "engines": {
