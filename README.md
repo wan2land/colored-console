@@ -13,16 +13,14 @@ $ npm install styled-console
 
 ## How To Use
 
-```js
-var StyledConsole = require('styled-console');
-console.log(StyledConsole("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><bg:blue>le</bg:blue>.").parse());
-```
-
-or
+> version 1.0.0 changed.
 
 ```js
 var StyledConsole = require('styled-console');
-console.log(new StyledConsole("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><bg:blue>le</bg:blue>.").parse());
+var styledConsole = new StyledConsole; // or StyledConsole();
+console.log(
+    styledConsole.parse("<c:red>St<b><u>y</u>le</b>d</c:red> Con<u>so</u><b:blue>le</b:blue>.")
+);
 ```
 
 ## Tags
